@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/ivPoster"
+        android:layout_width="310dp"
+        android:layout_height="357dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/ivAccept"
+            android:layout_width="66dp"
+            android:layout_height="65dp"
+            app:srcCompat="@drawable/baseline_close_24"
+            android:layout_marginRight="100dp"/>
+        <ImageView
+            android:id="@+id/ivReject"
+            android:layout_width="53dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/heart"
+            />
+
+
+    </LinearLayout>
+</LinearLayout>
