@@ -11,33 +11,67 @@
     <ImageView
         android:id="@+id/ivPoster"
         android:layout_width="310dp"
-        android:layout_height="357dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_height="314dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:layout_marginBottom="40dp"/>
 
     <TextView
         android:id="@+id/tvAnimeName"
-        android:textSize="24sp"
+        android:fontFamily="@font/caviardreams_bold"
+        android:textSize="30sp"
         android:layout_marginBottom="8dp"
         android:layout_width="wrap_content"
         android:text="@string/attack_on_titan"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvDemografia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:fontFamily="@font/caviardreams_bold"
+            android:text="Demografía"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/tvAño"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/caviardreams_bold"
+            android:text="Año"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center">
+
         <ImageView
             android:id="@+id/ivReject"
             android:layout_width="66dp"
             android:layout_height="65dp"
             app:srcCompat="@drawable/baseline_close_24"
             android:layout_marginRight="100dp"/>
+
         <ImageView
             android:id="@+id/ivAccept"
             android:layout_width="53dp"
             android:layout_height="50dp"
             app:srcCompat="@drawable/heart"
             />
+
 
 
     </LinearLayout>
