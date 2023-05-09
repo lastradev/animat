@@ -12,8 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimaT">
         <activity
+            android:name=".Activity_Matched_Animes"
+            android:exported="false"
+            android:label="@string/title_activity_matched_animes"
+            android:theme="@style/Theme.AnimaT.NoActionBar" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

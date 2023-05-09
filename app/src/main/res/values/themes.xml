@@ -16,4 +16,13 @@
         <item name="android:actionMenuTextColor">@color/white</item>
 
     </style>
+
+    <style name="Theme.AnimaT.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.AnimaT.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.AnimaT.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
