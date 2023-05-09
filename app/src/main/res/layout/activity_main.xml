@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/ivPoster"
+        android:layout_width="310dp"
+        android:layout_height="314dp"
+        android:layout_marginBottom="40dp"
+        tools:srcCompat= "@drawable/logo_gojo_round" />
 
     <TextView
+        android:id="@+id/tvAnimeName"
+        android:fontFamily="@font/caviardreams_bold"
+        android:textSize="30sp"
+        android:layout_marginBottom="8dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text = "@string/bienvenido_nakama"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/ingresa_tu_nombre"
+        android:fontFamily="@font/caviardreams_bold"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/ingresa_tu_edad"
+        android:fontFamily="@font/caviardreams_bold"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/confirmar"
+        android:fontFamily="@font/caviardreams_bold"/>
+
+</LinearLayout>
