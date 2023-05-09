@@ -13,14 +13,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 const val IMAGE_URL = "https://m.media-amazon.com/images/I/71TfuzTNFwL._AC_UF894,1000_QL80_.jpg"
-class MainActivity2 : AppCompatActivity() {
+class Activity_Animes: AppCompatActivity() {
     private lateinit var ivPoster: ImageView
     private lateinit var ivAccept: ImageView
     private lateinit var ivReject: ImageView
     private lateinit var tvAnimeName: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_animes)
 
         ivPoster = findViewById(R.id.ivPoster)
         ivReject = findViewById(R.id.ivReject)

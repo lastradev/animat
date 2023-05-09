@@ -17,7 +17,7 @@
             android:label="@string/title_activity_match_animes"
             android:theme="@style/Theme.AnimaT" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".Activity_Animes"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

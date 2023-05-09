@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity2"
+    tools:context=".Activity_Animes"
     android:orientation="vertical"
     android:gravity="center">
 
@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/caviardreams_bold"
             android:text="Año"
+            android:textStyle="italic"
             android:textColor="@color/black"
             android:textSize="22sp" />
     </LinearLayout>
