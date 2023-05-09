@@ -2,6 +2,7 @@ package com.example.animat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -43,9 +44,10 @@ class Activity_Animes: AppCompatActivity() {
 
         apiCall.getTopAiringAnimes().enqueue(object: Callback<Animes> {
             override fun onResponse(call: Call<Animes>, response: Response<Animes>) {
+                Log.d("API", response.body().toString())
                 // Aquí vamos a cargar más información del anime.
-                Picasso.get().load(response.body()?.animeList?.get(0)?.animeImg.toString()).into(ivPoster)
-                tvAnimeName.text = response.body()?.animeList?.get(0)?.animeTitle.toString()
+                //Picasso.get().load(response.body()?.animeList?.get(0)?.animeImg.toString()).into(ivPoster)
+                //tvAnimeName.text = response.body()?.animeList?.get(0)?.animeTitle.toString()
             }
 
             override fun onFailure(call: Call<Animes>, t: Throwable) {

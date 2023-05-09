@@ -9,14 +9,14 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/ivPoster"
+        android:id="@+id/ivWelcome"
         android:layout_width="310dp"
         android:layout_height="314dp"
         android:layout_marginBottom="40dp"
         tools:srcCompat= "@drawable/logo_gojo_round" />
 
     <TextView
-        android:id="@+id/tvAnimeName"
+        android:id="@+id/tvWelcome"
         android:fontFamily="@font/caviardreams_bold"
         android:textSize="30sp"
         android:layout_marginBottom="8dp"
@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"/>
 
     <EditText
+        android:id="@+id/etUserName"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:hint="@string/ingresa_tu_nombre"
@@ -35,6 +36,7 @@
         android:layout_marginTop="16dp"/>
 
     <EditText
+        android:id="@+id/etUserAge"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:hint="@string/ingresa_tu_edad"
@@ -42,6 +44,7 @@
         android:layout_marginBottom="16dp"/>
 
     <Button
+        android:id="@+id/bnContinue"
         android:layout_width="140dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
