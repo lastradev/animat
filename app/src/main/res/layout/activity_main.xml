@@ -1,54 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center">
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/ivWelcome"
         android:layout_width="310dp"
         android:layout_height="314dp"
         android:layout_marginBottom="40dp"
-        tools:srcCompat= "@drawable/logo_gojo_round" />
+        android:src="@drawable/logo_gojo_round" />
 
     <TextView
         android:id="@+id/tvWelcome"
-        android:fontFamily="@font/caviardreams_bold"
-        android:textSize="30sp"
-        android:layout_marginBottom="8dp"
         android:layout_width="wrap_content"
-        android:text = "@string/bienvenido_nakama"
-        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/caviardreams_bold"
+        android:text="@string/bienvenido_nakama"
         android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etUserName"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:hint="@string/ingresa_tu_nombre"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/caviardreams_bold"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"/>
+        android:hint="@string/ingresa_tu_nombre"
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/etUserAge"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:hint="@string/ingresa_tu_edad"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/caviardreams_bold"
-        android:layout_marginBottom="16dp"/>
+        android:hint="@string/ingresa_tu_edad"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/bnContinue"
         android:layout_width="140dp"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/confirmar"
-        android:fontFamily="@font/caviardreams_bold"/>
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/caviardreams_bold"
+        android:text="@string/confirmar" />
 
 </LinearLayout>
