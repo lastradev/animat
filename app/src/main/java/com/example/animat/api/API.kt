@@ -3,7 +3,7 @@ package com.example.animat.api
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val URL_BASE = "https://gogoanime.consumet.stream/"
+const val URL_BASE = "https://api.consumet.org/anime/gogoanime/"
 
 class API {
     fun createAPIService(): ApiInterface {
