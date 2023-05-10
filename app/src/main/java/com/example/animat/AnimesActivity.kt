@@ -2,7 +2,6 @@ package com.example.animat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -14,12 +13,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Activity_Animes: AppCompatActivity() {
+class AnimesActivity: AppCompatActivity() {
     private lateinit var ivPoster: ImageView
     private lateinit var ivAccept: ImageView
     private lateinit var ivReject: ImageView
     private lateinit var tvAnimeName: TextView
-    private lateinit var Animes: List<Anime>
+    private lateinit var animes: List<Anime>
     private var animeIndex: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +28,19 @@ class Activity_Animes: AppCompatActivity() {
         ivReject = findViewById(R.id.ivReject)
         ivAccept = findViewById(R.id.ivAccept)
         tvAnimeName = findViewById(R.id.tvAnimeName)
+        val apiCall = API().createAPIService()
+
+        apiCall.getTopAiringAnimes().enqueue(object: Callback<Animes> {
+            override fun onResponse(call: Call<Animes>, response: Response<Animes>) {
+                animes = response.body()?.results!!
+                Picasso.get().load(response.body()?.results?.get(animeIndex)?.image).into(ivPoster)
+                tvAnimeName.text = response.body()?.results?.get(animeIndex)?.title
+            }
+
+            override fun onFailure(call: Call<Animes>, t: Throwable) {
+                // TODO: Aquí vamos a cargar un toast de falla
+            }
+        })
 
         ivAccept.setOnClickListener{
             // TODO: Aquí vamos a guardar el anime en nuestro catálogo
@@ -39,22 +51,8 @@ class Activity_Animes: AppCompatActivity() {
             // TODO: Aquí vamos a solicitar otro anime de gogoanime
             animeIndex+=1
             Toast.makeText(this, "Anime rechazado!", Toast.LENGTH_SHORT).show()
-            Picasso.get().load(Animes[animeIndex]?.image.toString()).into(ivPoster)
-            tvAnimeName.text = Animes[animeIndex]?.title.toString()
+            Picasso.get().load(animes[animeIndex].image).into(ivPoster)
+            tvAnimeName.text = animes[animeIndex].title
         }
-
-        val apiCall = API().createAPIService()
-
-        apiCall.getTopAiringAnimes().enqueue(object: Callback<Animes> {
-            override fun onResponse(call: Call<Animes>, response: Response<Animes>) {
-                Animes = response.body()?.results!!
-                Picasso.get().load(response.body()?.results?.get(animeIndex)?.image.toString()).into(ivPoster)
-                tvAnimeName.text = response.body()?.results?.get(animeIndex)?.title.toString()
-            }
-
-            override fun onFailure(call: Call<Animes>, t: Throwable) {
-                // TODO: Aquí vamos a cargar una pantalla de falla.
-            }
-        })
     }
 }

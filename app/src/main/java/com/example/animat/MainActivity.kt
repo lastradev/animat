@@ -9,20 +9,21 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 
+const val USER_NAME_KEY = "name"
+const val USER_AGE_KEY = "age"
+
 class MainActivity : AppCompatActivity() {
     private lateinit var tvWelcome: TextView
     private lateinit var etUserName: EditText
     private lateinit var etUserAge: EditText
-    private val USER_NAME_KEY = "name"
-    private val USER_AGE_KEY = "age"
     private var name: String = ""
     private var age: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d("PREFERENCIAS", "onCreate")
-
-        var bnContinue = findViewById<Button>(R.id.bnContinue)
+        val bnContinue = findViewById<Button>(R.id.bnContinue)
         tvWelcome = findViewById(R.id.tvWelcome)
         etUserName = findViewById(R.id.etUserName)
         etUserAge = findViewById(R.id.etUserAge)
@@ -32,28 +33,30 @@ class MainActivity : AppCompatActivity() {
             age = etUserAge.text.toString().toInt()
             val miSharedPreferences = getSharedPreferences("PERSISTENCIA", MODE_PRIVATE)
             val editor = miSharedPreferences.edit()
+
             editor.putString(USER_NAME_KEY, name)
             editor.putInt(USER_AGE_KEY, age)
             editor.apply()
-            val i = Intent(this, Activity_Animes::class.java)
+
+            val i = Intent(this, AnimesActivity::class.java)
             startActivity(i)
         }
     }
     override fun onResume() {
         Log.d("PREFERENCIAS", "onResume")
+
         if(TextUtils.isEmpty(name)){
             val miSharedPreferences = getSharedPreferences("PERSISTENCIA", MODE_PRIVATE)
             name = miSharedPreferences.getString(USER_NAME_KEY, "").toString()
             age = miSharedPreferences.getInt(USER_AGE_KEY, 0)
         }
+
         if (name != ""){
             tvWelcome.text = "Bienvenido $name"
             etUserName.setText(name)
             etUserAge.setText(age.toString())
-        }else {
-            etUserName.setText("Ingresa tu nombre")
-            etUserAge.setText("Ingresa tu edad")
         }
+
         super.onResume()
     }
     override fun onStart() {

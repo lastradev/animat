@@ -31,7 +31,7 @@
             android:label="@string/title_activity_match_animes"
             android:theme="@style/Theme.AnimaT" />
         <activity
-            android:name=".Activity_Animes"
+            android:name=".AnimesActivity"
             android:exported="true" />
     </application>
 
