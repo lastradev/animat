@@ -7,18 +7,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.animat.api.API
+import com.example.animat.models.Anime
 import com.example.animat.models.Animes
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-const val IMAGE_URL = "https://m.media-amazon.com/images/I/71TfuzTNFwL._AC_UF894,1000_QL80_.jpg"
 class Activity_Animes: AppCompatActivity() {
     private lateinit var ivPoster: ImageView
     private lateinit var ivAccept: ImageView
     private lateinit var ivReject: ImageView
     private lateinit var tvAnimeName: TextView
+    private lateinit var Animes: List<Anime>
+    private var animeIndex: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animes)
@@ -28,8 +30,6 @@ class Activity_Animes: AppCompatActivity() {
         ivAccept = findViewById(R.id.ivAccept)
         tvAnimeName = findViewById(R.id.tvAnimeName)
 
-        Picasso.get().load(IMAGE_URL).into(ivPoster);
-
         ivAccept.setOnClickListener{
             // TODO: Aquí vamos a guardar el anime en nuestro catálogo
            Toast.makeText(this, "Guardado a tu catálogo!", Toast.LENGTH_SHORT).show()
@@ -37,17 +37,19 @@ class Activity_Animes: AppCompatActivity() {
 
         ivReject.setOnClickListener{
             // TODO: Aquí vamos a solicitar otro anime de gogoanime
+            animeIndex+=1
             Toast.makeText(this, "Anime rechazado!", Toast.LENGTH_SHORT).show()
+            Picasso.get().load(Animes[animeIndex]?.image.toString()).into(ivPoster)
+            tvAnimeName.text = Animes[animeIndex]?.title.toString()
         }
 
         val apiCall = API().createAPIService()
 
         apiCall.getTopAiringAnimes().enqueue(object: Callback<Animes> {
             override fun onResponse(call: Call<Animes>, response: Response<Animes>) {
-                Log.d("API", response.body().toString())
-                // Aquí vamos a cargar más información del anime.
-                //Picasso.get().load(response.body()?.animeList?.get(0)?.animeImg.toString()).into(ivPoster)
-                //tvAnimeName.text = response.body()?.animeList?.get(0)?.animeTitle.toString()
+                Animes = response.body()?.results!!
+                Picasso.get().load(response.body()?.results?.get(animeIndex)?.image.toString()).into(ivPoster)
+                tvAnimeName.text = response.body()?.results?.get(animeIndex)?.title.toString()
             }
 
             override fun onFailure(call: Call<Animes>, t: Throwable) {
