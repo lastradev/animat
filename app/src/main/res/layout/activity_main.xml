@@ -1,18 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/ivWelcome"
+        android:layout_width="310dp"
+        android:layout_height="314dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/logo_gojo_round" />
+
     <TextView
+        android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/caviardreams_bold"
+        android:text="@string/bienvenido_nakama"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/etUserName"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/caviardreams_bold"
+        android:hint="@string/ingresa_tu_nombre"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/etUserAge"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/caviardreams_bold"
+        android:hint="@string/ingresa_tu_edad"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/bnContinue"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/caviardreams_bold"
+        android:text="@string/confirmar" />
+
+</LinearLayout>
