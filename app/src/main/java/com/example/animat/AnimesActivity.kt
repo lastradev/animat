@@ -1,5 +1,6 @@
 package com.example.animat
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -45,6 +46,8 @@ class AnimesActivity: AppCompatActivity() {
         ivAccept.setOnClickListener{
             // TODO: Aquí vamos a guardar el anime en nuestro catálogo
            Toast.makeText(this, "Guardado a tu catálogo!", Toast.LENGTH_SHORT).show()
+            val i = Intent(this,Activity_Matched_Animes::class.java)
+            startActivity(i)
         }
 
         ivReject.setOnClickListener{
