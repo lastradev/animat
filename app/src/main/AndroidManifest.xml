@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimaT">
         <activity
-            android:name=".Activity_Matched_Animes"
+            android:name=".MatchedAnimesActivity"
             android:exported="false"
             android:label="@string/title_activity_matched_animes"
             android:theme="@style/Theme.AnimaT.NoActionBar" />
@@ -25,11 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity_MatchAnimes"
-            android:exported="false"
-            android:label="@string/title_activity_match_animes"
-            android:theme="@style/Theme.AnimaT" />
         <activity
             android:name=".AnimesActivity"
             android:exported="true" />

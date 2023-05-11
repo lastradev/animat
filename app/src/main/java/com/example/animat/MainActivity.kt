@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -22,7 +24,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("PREFERENCIAS", "onCreate")
+
+        Log.d("PREFERENCES", "onCreate")
+
         val bnContinue = findViewById<Button>(R.id.bnContinue)
         tvWelcome = findViewById(R.id.tvWelcome)
         etUserName = findViewById(R.id.etUserName)
@@ -31,8 +35,9 @@ class MainActivity : AppCompatActivity() {
         bnContinue.setOnClickListener {
             name = etUserName.text.toString()
             age = etUserAge.text.toString().toInt()
-            val miSharedPreferences = getSharedPreferences("PERSISTENCIA", MODE_PRIVATE)
-            val editor = miSharedPreferences.edit()
+
+            val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
 
             editor.putString(USER_NAME_KEY, name)
             editor.putInt(USER_AGE_KEY, age)
@@ -42,13 +47,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
     }
+
     override fun onResume() {
-        Log.d("PREFERENCIAS", "onResume")
+        Log.d("PREFERENCES", "onResume")
 
         if(TextUtils.isEmpty(name)){
-            val miSharedPreferences = getSharedPreferences("PERSISTENCIA", MODE_PRIVATE)
-            name = miSharedPreferences.getString(USER_NAME_KEY, "").toString()
-            age = miSharedPreferences.getInt(USER_AGE_KEY, 0)
+            val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
+            name = sharedPreferences.getString(USER_NAME_KEY, "").toString()
+            age = sharedPreferences.getInt(USER_AGE_KEY, 0)
         }
 
         if (name != ""){
@@ -59,16 +65,32 @@ class MainActivity : AppCompatActivity() {
 
         super.onResume()
     }
+
     override fun onStart() {
-        Log.d("PREFERENCIAS", "onStart")
+        Log.d("PREFERENCES", "onStart")
         super.onStart()
     }
+
     override fun onPause() {
-        Log.d("PREFERENCIAS", "onPause")
+        Log.d("PREFERENCES", "onPause")
         super.onPause()
     }
+
     override fun onDestroy() {
-        Log.d("PREFERENCIAS", "onDestroy")
+        Log.d("PREFERENCES", "onDestroy")
         super.onDestroy()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_animes, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.option_menu_list) {
+            val i = Intent(this,MatchedAnimesActivity::class.java)
+            startActivity(i)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
