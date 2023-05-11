@@ -18,4 +18,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="saved_to_your_catalog">¡Guardado a tu catálogo!</string>
     <string name="rejected_anime">¡Anime rechazado!</string>
+    <string name="failure_message">¡Kamisama, tenemos un problema desu! Por favor, intenta de nuevo más tarde.</string>
 </resources>
