@@ -28,6 +28,6 @@ class MatchedAnimesActivity: AppCompatActivity() {
         val recycler = findViewById<RecyclerView>(R.id.recyclerAnime)
 
         recycler.layoutManager = linearLayoutManager
-        recycler.adapter = MatchedAnimeAdapter(matchedAnimes,this)
+        recycler.adapter = MatchedAnimeAdapter(matchedAnimes)
     }
 }
