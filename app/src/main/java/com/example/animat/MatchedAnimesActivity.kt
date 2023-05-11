@@ -28,9 +28,7 @@ class MatchedAnimesActivity: AppCompatActivity() {
         }
 
         val recycler = findViewById<RecyclerView>(R.id.recyclerAnime)
-
-
-
+        
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             val gridLayoutManager = GridLayoutManager(this, 2)
             recycler.layoutManager = gridLayoutManager
@@ -38,6 +36,6 @@ class MatchedAnimesActivity: AppCompatActivity() {
             val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             recycler.layoutManager = linearLayoutManager
         }
-        recycler.adapter = MatchedAnimeAdapter(matchedAnimes)
+        recycler.adapter = MatchedAnimeAdapter(matchedAnimes, this)
     }
 }
