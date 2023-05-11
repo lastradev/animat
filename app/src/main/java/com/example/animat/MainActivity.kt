@@ -8,21 +8,24 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.example.animat.models.Anime
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 const val USER_NAME_KEY = "name"
 const val USER_AGE_KEY = "age"
-
 class MainActivity : AppCompatActivity() {
     private lateinit var tvWelcome: TextView
     private lateinit var etUserName: EditText
     private lateinit var etUserAge: EditText
     private var name: String = ""
     private var age: Int = 0
+    private var matchedAnimes: ArrayList<Anime> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("PREFERENCIAS", "onCreate")
+        Log.d("PREFERENCES", "onCreate")
         val bnContinue = findViewById<Button>(R.id.bnContinue)
         tvWelcome = findViewById(R.id.tvWelcome)
         etUserName = findViewById(R.id.etUserName)
@@ -31,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         bnContinue.setOnClickListener {
             name = etUserName.text.toString()
             age = etUserAge.text.toString().toInt()
-            val miSharedPreferences = getSharedPreferences("PERSISTENCIA", MODE_PRIVATE)
-            val editor = miSharedPreferences.edit()
+            val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
 
             editor.putString(USER_NAME_KEY, name)
             editor.putInt(USER_AGE_KEY, age)
@@ -43,12 +46,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
     override fun onResume() {
-        Log.d("PREFERENCIAS", "onResume")
+        Log.d("PREFERENCES", "onResume")
 
         if(TextUtils.isEmpty(name)){
-            val miSharedPreferences = getSharedPreferences("PERSISTENCIA", MODE_PRIVATE)
-            name = miSharedPreferences.getString(USER_NAME_KEY, "").toString()
-            age = miSharedPreferences.getInt(USER_AGE_KEY, 0)
+            val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
+            name = sharedPreferences.getString(USER_NAME_KEY, "").toString()
+            age = sharedPreferences.getInt(USER_AGE_KEY, 0)
+            val gson = Gson()
+            val matchedAnimesJson = sharedPreferences.getString(MATCHED_ANIMES_KEY, null)
+            if (matchedAnimesJson != null) {
+                val type = object : TypeToken<ArrayList<Anime>>() {}.type
+                matchedAnimes = gson.fromJson(matchedAnimesJson, type)
+            }
+            Log.d("LOGIN", matchedAnimes.toString())
         }
 
         if (name != ""){
@@ -60,15 +70,15 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
     }
     override fun onStart() {
-        Log.d("PREFERENCIAS", "onStart")
+        Log.d("PREFERENCES", "onStart")
         super.onStart()
     }
     override fun onPause() {
-        Log.d("PREFERENCIAS", "onPause")
+        Log.d("PREFERENCES", "onPause")
         super.onPause()
     }
     override fun onDestroy() {
-        Log.d("PREFERENCIAS", "onDestroy")
+        Log.d("PREFERENCES", "onDestroy")
         super.onDestroy()
     }
 }
