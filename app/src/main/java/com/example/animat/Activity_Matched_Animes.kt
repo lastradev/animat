@@ -1,42 +1,45 @@
 package com.example.animat
 
-import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.animat.databinding.ActivityMatchedAnimesBinding
+import android.os.Bundle
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.animat.adapters.MatchedAnimeAdapter
+import com.example.animat.api.API
+import com.example.animat.models.Anime
+import com.example.animat.models.Animes
+import com.squareup.picasso.Picasso
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class Activity_Matched_Animes : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMatchedAnimesBinding
+class Activity_Matched_Animes: AppCompatActivity() {
+    private lateinit var matchedAnimes : ArrayList<Anime>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_matched_animes)
 
-        binding = ActivityMatchedAnimesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        matchedAnimes = arrayListOf<Anime>()
+        // Dummy Array para probar, borrar despues
+        matchedAnimes.add(Anime("dlsmd","Kimetsu no yaiba","https://http2.mlstatic.com/D_NQ_NP_690431-MLM48877492720_012022-O.jpg"
+        , genres = arrayListOf("Shonen","Shoyo")))
+        matchedAnimes.add(Anime("sads","Haikyuu","https://http2.mlstatic.com/D_NQ_NP_690431-MLM48877492720_012022-O.jpg"
+        , genres = arrayListOf("Shonen","Shoyo")))
+        matchedAnimes.add(Anime("Dadad","Jujutsu Kaisen","https://http2.mlstatic.com/D_NQ_NP_690431-MLM48877492720_012022-O.jpg"
+        , genres = arrayListOf("Shonen","Shoyo")))
+        matchedAnimes.add(Anime("adad","Horimiya","https://http2.mlstatic.com/D_NQ_NP_690431-MLM48877492720_012022-O.jpg"
+        , genres = arrayListOf("Shonen","Shoyo")))
 
-        val navController =
-            findNavController(R.id.nav_host_fragment_content_activity_matched_animes)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val recycler = findViewById<RecyclerView>(R.id.recyclerAnime)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController =
-            findNavController(R.id.nav_host_fragment_content_activity_matched_animes)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        recycler.layoutManager = linearLayoutManager
+        recycler.adapter = MatchedAnimeAdapter(matchedAnimes,this)
     }
 }
