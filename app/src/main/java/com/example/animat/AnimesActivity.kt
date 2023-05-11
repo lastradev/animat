@@ -3,7 +3,6 @@ package com.example.animat
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -20,6 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 const val MATCHED_ANIMES_KEY = "matchedAnimes"
+
 class AnimesActivity: AppCompatActivity() {
     private lateinit var ivPoster: ImageView
     private lateinit var ivAccept: ImageView
@@ -27,7 +27,7 @@ class AnimesActivity: AppCompatActivity() {
     private lateinit var tvAnimeName: TextView
     private lateinit var animes: List<Anime>
     private var animeIndex: Int = 0
-    private var matchedAnimes: ArrayList<Anime> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animes)
@@ -51,36 +51,54 @@ class AnimesActivity: AppCompatActivity() {
         })
 
         ivAccept.setOnClickListener{
-            Toast.makeText(this, "Guardado a tu catálogo!", Toast.LENGTH_SHORT).show()
             saveMatchedAnime()
+            showSavedToast()
             showNextAnime()
         }
 
         ivReject.setOnClickListener{
-            Toast.makeText(this, "Anime rechazado!", Toast.LENGTH_SHORT).show()
+            showRejectedToast()
             showNextAnime()
         }
     }
+
+    private fun showRejectedToast() {
+        Toast.makeText(this, getString(R.string.rejected_anime), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showSavedToast() {
+        Toast.makeText(this, getString(R.string.saved_to_your_catalog), Toast.LENGTH_SHORT).show()
+    }
+
     private fun showNextAnime() {
         animeIndex += 1
         Picasso.get().load(animes[animeIndex].image).into(ivPoster)
         tvAnimeName.text = animes[animeIndex].title
     }
     private fun saveMatchedAnime() {
-        // Get matched animes saved in sharedPreferences
+        val currentAnime = animes[animeIndex]
+        val matchedAnimes = obtainMatchedAnimes()
+
+        matchedAnimes.add(currentAnime)
+        saveMatchedAnimes(matchedAnimes)
+    }
+
+    private fun obtainMatchedAnimes(): ArrayList<Anime> {
         val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
-        val gson = Gson()
         val matchedAnimesJson = sharedPreferences.getString(MATCHED_ANIMES_KEY, null)
-        if (matchedAnimesJson != null) {
-            val type = object : TypeToken<ArrayList<Anime>>() {}.type
-            matchedAnimes = gson.fromJson(matchedAnimesJson, type)
-        }
-        // Add new matched anime
-        matchedAnimes.add(animes[animeIndex])
-        // Save matched animes
+            ?: return arrayListOf()
+
+        // Gson helps mapping json to class.
+        val type = object : TypeToken<ArrayList<Anime>>() {}.type
+        return Gson().fromJson(matchedAnimesJson, type)
+    }
+
+    private fun saveMatchedAnimes(matchedAnimes: ArrayList<Anime>) {
+        val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        val matchedAnimesJsonUpdated = gson.toJson(matchedAnimes)
-        editor.putString(MATCHED_ANIMES_KEY, matchedAnimesJsonUpdated)
+        val matchedAnimesJson = Gson().toJson(matchedAnimes)
+
+        editor.putString(MATCHED_ANIMES_KEY, matchedAnimesJson)
         editor.apply()
     }
 
@@ -90,7 +108,7 @@ class AnimesActivity: AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.option_menu_list) {
-            val i = Intent(this,Activity_Matched_Animes::class.java)
+            val i = Intent(this,MatchedAnimesActivity::class.java)
             startActivity(i)
         }
         return super.onOptionsItemSelected(item)

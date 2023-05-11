@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.option_menu_list) {
-            val i = Intent(this,Activity_Matched_Animes::class.java)
+            val i = Intent(this,MatchedAnimesActivity::class.java)
             startActivity(i)
         }
         return super.onOptionsItemSelected(item)
