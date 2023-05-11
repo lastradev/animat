@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -80,5 +82,16 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         Log.d("PREFERENCES", "onDestroy")
         super.onDestroy()
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_animes, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.option_menu_list) {
+            val i = Intent(this,Activity_Matched_Animes::class.java)
+            startActivity(i)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

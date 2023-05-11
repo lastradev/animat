@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animat.R
 import com.example.animat.models.Anime
+import com.squareup.picasso.Picasso
 import java.net.URL
 
 
@@ -53,9 +54,9 @@ class MatchedAnimeAdapter(matchedAnimes: ArrayList<Anime>, contexto : Context) :
         val anime: Anime = innerMatchedAnimes.get(position)
         val uri = Uri.parse(anime.image)
         val firstGenre = anime.genres.get(0)
-        holder.ivPoster.setImageURI(uri)
         holder.tvAnimeName.text = anime.title
         holder.tvDemografia.text = firstGenre
         holder.tvAño.text = "2015"
+        Picasso.get().load(anime.image).into(holder.ivPoster);
     }
 }

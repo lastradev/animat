@@ -12,29 +12,27 @@ import com.example.animat.adapters.MatchedAnimeAdapter
 import com.example.animat.api.API
 import com.example.animat.models.Anime
 import com.example.animat.models.Animes
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class Activity_Matched_Animes: AppCompatActivity() {
-    private lateinit var matchedAnimes : ArrayList<Anime>
+    private var matchedAnimes: ArrayList<Anime> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_matched_animes)
 
-
-        matchedAnimes = arrayListOf<Anime>()
-        // Dummy Array para probar, borrar despues
-        matchedAnimes.add(Anime("dlsmd","Kimetsu no yaiba","https://http2.mlstatic.com/D_NQ_NP_690431-MLM48877492720_012022-O.jpg"
-        , genres = arrayListOf("Shonen","Shoyo")))
-        matchedAnimes.add(Anime("sads","Haikyuu","https://http2.mlstatic.com/D_NQ_NP_690431-MLM48877492720_012022-O.jpg"
-        , genres = arrayListOf("Shonen","Shoyo")))
-        matchedAnimes.add(Anime("Dadad","Jujutsu Kaisen","https://http2.mlstatic.com/D_NQ_NP_690431-MLM48877492720_012022-O.jpg"
-        , genres = arrayListOf("Shonen","Shoyo")))
-        matchedAnimes.add(Anime("adad","Horimiya","https://http2.mlstatic.com/D_NQ_NP_690431-MLM48877492720_012022-O.jpg"
-        , genres = arrayListOf("Shonen","Shoyo")))
+        val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
+        val gson = Gson()
+        val matchedAnimesJson = sharedPreferences.getString(MATCHED_ANIMES_KEY, null)
+        if (matchedAnimesJson != null) {
+            val type = object : TypeToken<ArrayList<Anime>>() {}.type
+            matchedAnimes = gson.fromJson(matchedAnimesJson, type)
+        }
 
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val recycler = findViewById<RecyclerView>(R.id.recyclerAnime)

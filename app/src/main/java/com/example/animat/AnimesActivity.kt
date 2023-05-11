@@ -1,8 +1,11 @@
 package com.example.animat
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -79,5 +82,17 @@ class AnimesActivity: AppCompatActivity() {
         val matchedAnimesJsonUpdated = gson.toJson(matchedAnimes)
         editor.putString(MATCHED_ANIMES_KEY, matchedAnimesJsonUpdated)
         editor.apply()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_animes, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.option_menu_list) {
+            val i = Intent(this,Activity_Matched_Animes::class.java)
+            startActivity(i)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
