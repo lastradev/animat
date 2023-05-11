@@ -112,16 +112,18 @@ class AnimesActivity: AppCompatActivity() {
 
     private fun showNextAnime() {
         forwardAnimeIndex()
-        Picasso.get().load(animes[animeIndex].image).into(ivPoster)
-        tvAnimeName.text = animes[animeIndex].title
+        if(animeIndex != 0){
+            Picasso.get().load(animes[animeIndex].image).into(ivPoster)
+            tvAnimeName.text = animes[animeIndex].title
+        }
     }
 
     private fun forwardAnimeIndex() {
         animeIndex += 1
 
-        if (animeIndex == 10) {
-            showNextPage()
+        if (animeIndex == animes.size) {
             animeIndex = 0
+            showNextPage()
         }
     }
 
