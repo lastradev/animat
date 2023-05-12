@@ -90,10 +90,10 @@
 
                     <ImageView
                         android:id="@+id/ivReject"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:scaleType="fitXY"
-                        android:layout_marginRight="100dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="fitCenter"
+                        android:layout_marginRight="90dp"
                         app:srcCompat="@drawable/baseline_close_24" />
 
                     <ImageView

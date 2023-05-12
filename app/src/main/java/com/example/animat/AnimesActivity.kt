@@ -3,6 +3,7 @@ package com.example.animat
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -26,6 +27,7 @@ class AnimesActivity: AppCompatActivity() {
     private lateinit var ivAccept: ImageView
     private lateinit var ivReject: ImageView
     private lateinit var tvAnimeName: TextView
+    private lateinit var tvDemografia: TextView
     private lateinit var animes: List<Anime>
     private var animeIndex: Int = 0
 
@@ -37,34 +39,46 @@ class AnimesActivity: AppCompatActivity() {
         ivReject = findViewById(R.id.ivReject)
         ivAccept = findViewById(R.id.ivAccept)
         tvAnimeName = findViewById(R.id.tvAnimeName)
+        tvDemografia = findViewById(R.id.tvDemografia)
 
-        fetchAnimes()
 
-        ivAccept.setOnClickListener{
+        ivAccept.setOnClickListener {
             saveMatchedAnime()
             showSavedToast()
             showNextAnime()
         }
 
-        ivReject.setOnClickListener{
+        ivReject.setOnClickListener {
             showRejectedToast()
             showNextAnime()
         }
+
+        fetchAnimes()
+
     }
 
     private fun fetchAnimes() {
         val currentPage = getCurrentPage()
         val apiCall = API().createAPIService()
 
-        apiCall.getTopAiringAnimes(currentPage).enqueue(object: Callback<TopAiringAnimeResponse> {
-            override fun onResponse(call: Call<TopAiringAnimeResponse>, response: Response<TopAiringAnimeResponse>) {
+        apiCall.getTopAiringAnimes(currentPage).enqueue(object : Callback<TopAiringAnimeResponse> {
+            override fun onResponse(
+                call: Call<TopAiringAnimeResponse>,
+                response: Response<TopAiringAnimeResponse>
+            ) {
                 animes = response.body()?.results!!
                 Picasso.get().load(response.body()?.results?.get(animeIndex)?.image).into(ivPoster)
                 tvAnimeName.text = response.body()?.results?.get(animeIndex)?.title
+                tvDemografia.text = response.body()?.results?.get(animeIndex)?.genres!![0]
+
             }
 
             override fun onFailure(call: Call<TopAiringAnimeResponse>, t: Throwable) {
-                Toast.makeText(this@AnimesActivity, getString(R.string.failure_message), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@AnimesActivity,
+                    getString(R.string.failure_message),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }
@@ -117,6 +131,7 @@ class AnimesActivity: AppCompatActivity() {
         if(animeIndex != 0){
             Picasso.get().load(animes[animeIndex].image).into(ivPoster)
             tvAnimeName.text = animes[animeIndex].title
+            tvDemografia.text = animes[animeIndex].genres[0]
         }
     }
 

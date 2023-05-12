@@ -24,14 +24,12 @@ class MatchedAnimeAdapter(matchedAnimes: ArrayList<Anime>, context: Context) :
         RecyclerView.ViewHolder(view), View.OnClickListener {
         val ivPoster: ImageView
         val tvAnimeName: TextView
-        val tvYear: TextView
         val tvGenre: TextView
         val fabDelete: FloatingActionButton
 
         init {
             ivPoster = view.findViewById(R.id.ivPoster)
             tvAnimeName = view.findViewById(R.id.tvAnimeName)
-            tvYear = view.findViewById(R.id.tvAño)
             tvGenre = view.findViewById(R.id.tvDemografia)
             fabDelete = view.findViewById(R.id.fabDelete)
 
@@ -75,7 +73,6 @@ class MatchedAnimeAdapter(matchedAnimes: ArrayList<Anime>, context: Context) :
 
         holder.tvAnimeName.text = anime.title
         holder.tvGenre.text = firstGenre
-        holder.tvYear.text = "2015"
 
         Picasso.get().load(anime.image).into(holder.ivPoster)
     }

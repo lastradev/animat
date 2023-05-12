@@ -11,6 +11,7 @@ import com.example.animat.models.Anime
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
+
 class MatchedAnimesActivity: AppCompatActivity() {
     private var matchedAnimes: ArrayList<Anime> = ArrayList()
 
@@ -28,7 +29,7 @@ class MatchedAnimesActivity: AppCompatActivity() {
         }
 
         val recycler = findViewById<RecyclerView>(R.id.recyclerAnime)
-        
+
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             val gridLayoutManager = GridLayoutManager(this, 2)
             recycler.layoutManager = gridLayoutManager
