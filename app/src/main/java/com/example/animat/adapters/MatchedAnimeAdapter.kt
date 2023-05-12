@@ -1,12 +1,16 @@
 package com.example.animat.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animat.MATCHED_ANIMES_KEY
 import com.example.animat.R
@@ -15,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
+
 
 class MatchedAnimeAdapter(matchedAnimes: ArrayList<Anime>, context: Context) :
     RecyclerView.Adapter<MatchedAnimeAdapter.ViewContainer>() {
@@ -26,12 +31,14 @@ class MatchedAnimeAdapter(matchedAnimes: ArrayList<Anime>, context: Context) :
         val tvAnimeName: TextView
         val tvGenre: TextView
         val fabDelete: FloatingActionButton
+        val bnWatch : Button
 
         init {
             ivPoster = view.findViewById(R.id.ivPoster)
             tvAnimeName = view.findViewById(R.id.tvAnimeName)
             tvGenre = view.findViewById(R.id.tvDemografia)
             fabDelete = view.findViewById(R.id.fabDelete)
+            bnWatch = view.findViewById(R.id.bnWatch)
 
             fabDelete.setOnClickListener(this)
         }
@@ -74,6 +81,19 @@ class MatchedAnimeAdapter(matchedAnimes: ArrayList<Anime>, context: Context) :
         holder.tvAnimeName.text = anime.title
         holder.tvGenre.text = firstGenre
 
+        holder.bnWatch.setOnClickListener {
+            val url = anime.url// You could have this at the top of the class as a constant, or pass it in as a method variable, if you wish to send to multiple websites
+
+            if (url != "") {
+                val i = Intent(Intent.ACTION_VIEW) // Create a new intent - stating you want to 'view something'
+
+                i.data = Uri.parse(url) // Add the url data (allowing android to realise you want to open the browser)
+
+                innerContext.startActivity(i) // Go go go!
+            } else {
+                Toast.makeText(innerContext, "Por el momento no es posible visualizar", Toast.LENGTH_LONG).show()
+            }
+        }
         Picasso.get().load(anime.image).into(holder.ivPoster)
     }
 }
