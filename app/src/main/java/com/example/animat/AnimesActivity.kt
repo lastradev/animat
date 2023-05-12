@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.animat.api.API
 import com.example.animat.models.Anime
-import com.example.animat.models.Animes
+import com.example.animat.models.TopAiringAnimeResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
@@ -20,6 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 const val MATCHED_ANIMES_KEY = "matchedAnimes"
+const val CURRENT_PAGE_KEY = "currentPage"
 
 class AnimesActivity: AppCompatActivity() {
     private lateinit var ivPoster: ImageView
@@ -40,32 +41,52 @@ class AnimesActivity: AppCompatActivity() {
         tvAnimeName = findViewById(R.id.tvAnimeName)
         tvDemografia = findViewById(R.id.tvDemografia)
 
-        val apiCall = API().createAPIService()
 
-        apiCall.getTopAiringAnimes().enqueue(object: Callback<Animes> {
-            override fun onResponse(call: Call<Animes>, response: Response<Animes>) {
-                animes = response.body()?.results!!
-                Picasso.get().load(response.body()?.results?.get(animeIndex)?.image).into(ivPoster)
-                tvAnimeName.text = response.body()?.results?.get(animeIndex)?.title
-
-                tvDemografia.text = response.body()?.results?.get(animeIndex)?.genres!![0]
-            }
-
-            override fun onFailure(call: Call<Animes>, t: Throwable) {
-                // TODO: Aquí vamos a cargar un toast de falla
-            }
-        })
-
-        ivAccept.setOnClickListener{
+        ivAccept.setOnClickListener {
             saveMatchedAnime()
             showSavedToast()
             showNextAnime()
         }
 
-        ivReject.setOnClickListener{
+        ivReject.setOnClickListener {
             showRejectedToast()
             showNextAnime()
         }
+
+        fetchAnimes()
+
+    }
+
+    private fun fetchAnimes() {
+        val currentPage = getCurrentPage()
+        val apiCall = API().createAPIService()
+
+        apiCall.getTopAiringAnimes(currentPage).enqueue(object : Callback<TopAiringAnimeResponse> {
+            override fun onResponse(
+                call: Call<TopAiringAnimeResponse>,
+                response: Response<TopAiringAnimeResponse>
+            ) {
+                animes = response.body()?.results!!
+                Picasso.get().load(response.body()?.results?.get(animeIndex)?.image).into(ivPoster)
+                tvAnimeName.text = response.body()?.results?.get(animeIndex)?.title
+                tvDemografia.text = response.body()?.results?.get(animeIndex)?.genres!![0]
+
+            }
+
+            override fun onFailure(call: Call<TopAiringAnimeResponse>, t: Throwable) {
+                Toast.makeText(
+                    this@AnimesActivity,
+                    getString(R.string.failure_message),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
+    }
+
+    private fun getCurrentPage(): Int {
+        val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
+
+        return sharedPreferences.getInt(CURRENT_PAGE_KEY, 1)
     }
 
     private fun showRejectedToast() {
@@ -76,18 +97,23 @@ class AnimesActivity: AppCompatActivity() {
         Toast.makeText(this, getString(R.string.saved_to_your_catalog), Toast.LENGTH_SHORT).show()
     }
 
-    private fun showNextAnime() {
-        animeIndex += 1
-        Picasso.get().load(animes[animeIndex].image).into(ivPoster)
-        tvAnimeName.text = animes[animeIndex].title
-        tvDemografia.text = animes[animeIndex].genres[0]
-    }
     private fun saveMatchedAnime() {
         val currentAnime = animes[animeIndex]
         val matchedAnimes = obtainMatchedAnimes()
 
-        matchedAnimes.add(currentAnime)
-        saveMatchedAnimes(matchedAnimes)
+        if (!matchedAnimes.any { it.id == currentAnime.id }) {
+            matchedAnimes.add(currentAnime)
+            saveMatchedAnimes(matchedAnimes)
+        }
+    }
+
+    private fun saveMatchedAnimes(matchedAnimes: ArrayList<Anime>) {
+        val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val matchedAnimesJson = Gson().toJson(matchedAnimes)
+
+        editor.putString(MATCHED_ANIMES_KEY, matchedAnimesJson)
+        editor.apply()
     }
 
     private fun obtainMatchedAnimes(): ArrayList<Anime> {
@@ -100,12 +126,36 @@ class AnimesActivity: AppCompatActivity() {
         return Gson().fromJson(matchedAnimesJson, type)
     }
 
-    private fun saveMatchedAnimes(matchedAnimes: ArrayList<Anime>) {
-        val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        val matchedAnimesJson = Gson().toJson(matchedAnimes)
+    private fun showNextAnime() {
+        forwardAnimeIndex()
+        if(animeIndex != 0){
+            Picasso.get().load(animes[animeIndex].image).into(ivPoster)
+            tvAnimeName.text = animes[animeIndex].title
+            tvDemografia.text = animes[animeIndex].genres[0]
+        }
+    }
 
-        editor.putString(MATCHED_ANIMES_KEY, matchedAnimesJson)
+    private fun forwardAnimeIndex() {
+        animeIndex += 1
+
+        if (animeIndex == animes.size) {
+            animeIndex = 0
+            showNextPage()
+        }
+    }
+
+
+    private fun showNextPage() {
+        forwardPage()
+        fetchAnimes()
+    }
+
+    private fun forwardPage() {
+        val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
+        val nextPage = getCurrentPage() + 1
+        val editor = sharedPreferences.edit()
+
+        editor.putInt(CURRENT_PAGE_KEY , nextPage)
         editor.apply()
     }
 
