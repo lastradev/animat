@@ -63,7 +63,7 @@
                     android:layout_marginVertical="12dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/caviardreams_bold"
-                    android:text="@string/attack_on_titan"
+                    android:text="@string/titulo_anime"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="22sp"
@@ -78,6 +78,16 @@
                     android:text="Demografía"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/bnWatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
+                    android:text="VER AHORA"
+                    android:textSize="12sp"
+                    android:textAlignment="center"
+                    />
 
 
             </LinearLayout>
