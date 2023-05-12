@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="8dp"
                     android:fontFamily="@font/caviardreams_bold"
-                    android:text="Demografía"
+                    android:text="@string/demography"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -84,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="8dp"
-                    android:text="VER AHORA"
+                    android:text="@string/watch_anime"
                     android:textSize="12sp"
                     android:textAlignment="center"
                     />

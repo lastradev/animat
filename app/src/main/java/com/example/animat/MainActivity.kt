@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (name != ""){
-            tvWelcome.text = "Hola $name-san!"
+            tvWelcome.text = resources.getString(R.string.greeting) + " " + name + "-san!"
             etUserName.setText(name)
             etUserAge.setText(age.toString())
         }

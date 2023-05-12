@@ -58,7 +58,7 @@ class MatchedAnimeAdapter(matchedAnimes: ArrayList<Anime>, context: Context) :
                     innerMatchedAnimes.removeAt(adapterPosition)
                     notifyItemRemoved(adapterPosition)
                 }
-                Toast.makeText(innerContext, "${anime.title} eliminado", Toast.LENGTH_LONG).show()
+                Toast.makeText(innerContext, "${anime.title} ${innerContext.getString(R.string.delete_anime)}", Toast.LENGTH_LONG).show()
             }
         }
     }

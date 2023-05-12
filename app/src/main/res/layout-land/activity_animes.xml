@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="48dp"
                         android:fontFamily="@font/caviardreams_bold"
-                        android:text="Demografía"
+                        android:text="@string/demography"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -74,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/caviardreams_bold"
-                        android:text="Año"
+                        android:text="@string/year"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="italic" />

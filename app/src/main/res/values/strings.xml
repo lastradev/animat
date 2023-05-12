@@ -19,4 +19,9 @@
     <string name="saved_to_your_catalog">¡Guardado a tu catálogo!</string>
     <string name="rejected_anime">¡Anime rechazado!</string>
     <string name="failure_message">¡Kamisama, tenemos un problema desu! Por favor, intenta de nuevo más tarde.</string>
+    <string name="demography">Demografía</string>
+    <string name="year">Año</string>
+    <string name="greeting">Hola</string>
+    <string name="delete_anime">eliminado de tu lista</string>
+    <string name="watch_anime">Ver Ahora</string>
 </resources>
