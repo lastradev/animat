@@ -4,6 +4,10 @@
     <string name="attack_on_titan">Attack on Titan</string>
     <string name="menu_icon">menu-icon</string>
     <string name="title_activity_match_animes">Activity_MatchAnimes</string>
+    <string name="bienvenido_nakama">¡Welcome Nakama!</string>
+    <string name="ingresa_tu_nombre">Enter your name</string>
+    <string name="ingresa_tu_edad">Enter your age</string>
+    <string name="confirmar">Confirm</string>
     <string name="title_activity_matched_animes">Activity_Matched_Animes</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -11,4 +15,10 @@
     <string name="previous">Previous</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="saved_to_your_catalog">Saved in your catalog</string>
+    <string name="rejected_anime">¡Anime rejected!</string>
+    <string name="failure_message">¡Kamisa, we have a problem!</string>
+    <string name="demography">Demography</string>
+    <string name="year">Year</string>
+    <string name="greeting">Hi</string>
 </resources>
