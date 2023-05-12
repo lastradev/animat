@@ -39,7 +39,7 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caviardreams_bold"
-                android:text="@string/attack_on_titan"
+                android:text="@string/titulo_anime"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="28sp"

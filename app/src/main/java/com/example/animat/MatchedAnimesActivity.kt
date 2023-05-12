@@ -1,8 +1,12 @@
 package com.example.animat
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +22,9 @@ class MatchedAnimesActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_matched_animes)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         val orientation = resources.configuration.orientation
         val sharedPreferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE)
@@ -38,5 +45,17 @@ class MatchedAnimesActivity: AppCompatActivity() {
             recycler.layoutManager = linearLayoutManager
         }
         recycler.adapter = MatchedAnimeAdapter(matchedAnimes, this)
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_animes, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.option_menu_list) {
+            val i = Intent(this,AnimesActivity::class.java)
+            startActivity(i)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
