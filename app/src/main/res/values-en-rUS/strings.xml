@@ -21,4 +21,7 @@
     <string name="demography">Demography</string>
     <string name="year">Year</string>
     <string name="greeting">Hi</string>
+    <string name="titulo_anime">Anime title</string>
+    <string name="delete_anime">removed from your list</string>
+    <string name="watch_anime">Watch Now</string>
 </resources>
