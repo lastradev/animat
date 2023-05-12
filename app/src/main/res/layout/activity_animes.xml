@@ -38,7 +38,6 @@
                 android:id="@+id/tvAnimeName"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/caviardreams_bold"
                 android:text="@string/attack_on_titan"
                 android:textAlignment="center"
@@ -47,39 +46,24 @@
                 android:textStyle="bold" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center">
 
                 <TextView
                     android:id="@+id/tvDemografia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="48dp"
                     android:fontFamily="@font/caviardreams_bold"
                     android:text="Demografía"
+                    android:layout_marginTop="20dp"
                     android:textColor="@color/black"
                     android:textSize="22sp" />
 
-                <TextView
-                    android:id="@+id/tvAño"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/caviardreams_bold"
-                    android:text="Año"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
-                    android:textStyle="italic" />
 
-            </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 android:gravity="center">
 

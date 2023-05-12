@@ -42,6 +42,7 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/caviardreams_bold"
         android:hint="@string/ingresa_tu_edad"
+        android:inputType="number"
         android:textAlignment="center" />
 
     <Button

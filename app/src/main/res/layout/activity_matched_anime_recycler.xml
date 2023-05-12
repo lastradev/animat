@@ -78,16 +78,6 @@
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/tvAño"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="8dp"
-                    android:fontFamily="@font/caviardreams_bold"
-                    android:text="Año"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="italic" />
 
             </LinearLayout>
 
