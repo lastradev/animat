@@ -87,8 +87,10 @@ class AnimesActivity: AppCompatActivity() {
         val currentAnime = animes[animeIndex]
         val matchedAnimes = obtainMatchedAnimes()
 
-        matchedAnimes.add(currentAnime)
-        saveMatchedAnimes(matchedAnimes)
+        if (!matchedAnimes.any { it.id == currentAnime.id }) {
+            matchedAnimes.add(currentAnime)
+            saveMatchedAnimes(matchedAnimes)
+        }
     }
 
     private fun saveMatchedAnimes(matchedAnimes: ArrayList<Anime>) {

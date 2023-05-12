@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (name != ""){
-            tvWelcome.text = "Bienvenido $name"
+            tvWelcome.text = "Hola $name-san!"
             etUserName.setText(name)
             etUserAge.setText(age.toString())
         }
